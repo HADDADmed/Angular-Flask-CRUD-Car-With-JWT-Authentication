@@ -1,0 +1,30 @@
+
+
+
+<div mat-dialog-content>
+  <p>Edit Car</p>
+
+  <p>
+  <mat-form-field >
+    <mat-label>Car Model</mat-label>
+    <input matInput [(ngModel)]="model"  >
+  </mat-form-field>
+ </p>
+ <p>
+  <mat-form-field>
+    <mat-label>Horse Power</mat-label>
+    <input matInput [(ngModel)]="hp" >
+  </mat-form-field>
+ </p>
+ <p>
+  <mat-form-field>
+    <mat-label>Car Brand</mat-label>
+    <input matInput [(ngModel)]="marque">
+  </mat-form-field>
+ </p>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-fab color="warn"  [mat-dialog-close]="marque" (click)="editCar()"  cdkFocusInitial>Save</button>
+</div>
+

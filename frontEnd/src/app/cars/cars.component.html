@@ -1,0 +1,42 @@
+<div>.</div>
+<div>.</div>
+<div>.</div>
+<div class="container pt-4 border ">
+<h1 class="mt-4 ">List of cars </h1>
+
+<table class="table table-sm table-striped mt-4 ">
+  <thead class="thead thead-primary">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Model</th>
+      <th scope="col">Hors Power</th>
+      <th scope="col">Brand</th>
+      <th scope="col">Delete</th>
+      <th scope="col">Edit</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor="let car of cars">
+      <th scope="row">{{car.id_car}}</th>
+      <td>{{car.model}}</td>
+      <td>{{car.hp}}</td>
+      <td>{{car.marque}}</td>
+      <td>
+        <a class="btn btn-danger rounded-circle btn-sm" href="/lisofcars" (click)="deleteMe(car.id_car)"><i class="fa-solid fa-trash-can"></i>
+        </a>
+      </td>
+      <td>
+          <span style="cursor:pointer;"> <a class="btn btn-secondary rounded-circle btn-sm"  (click)="openDialog(car.id_car)" ><i class="fa-regular fa-pen-to-square"></i></a></span>
+      </td>
+  </tr>
+  </tbody>
+</table>
+</div>
+
+
+
+
+
+        <!--</td>
+        <td><a [routerLink]="['/editcar', car.id_car]" >Edit     </a> #}-->
