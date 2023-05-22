@@ -1,12 +1,22 @@
+# import crypt
+
+from hashlib import scrypt
 from flask import Flask, request, jsonify
 import myCar as car
 import json
 from flask_cors import CORS
+from Users import User
+from flask_jwt_extended import (JWTManager, jwt_required, create_access_token,get_jwt_identity)
 
+from Users import User
+import bcrypt
 app = Flask(__name__)
 CORS(app)
 
 import mysql.connector
+app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this!
+app.config["JWT_ALGORITHM"] = "HS256"
+jwt = JWTManager(app)
 
 mydb = mysql.connector.connect(
     host="127.0.0.1",
@@ -108,6 +118,51 @@ def editCar(id):
 #     return "Car updated"
 
 
+@app.route('/login' , methods = ['POST'])
+def login():
+    try:
+        username = request.json.get("username", None)
+        password = request.json.get("password", None)
+
+
+        cursor = mydb.cursor()
+        req = "SELECT * FROM mydb.users WHERE username = %s"
+        val = (username,)
+        cursor.execute(req, val)
+        result = cursor.fetchone()
+        if result is None:
+            return jsonify({"status": "error", "data": "Bad username or password"}), 401
+        user = User(result[1], result[2])
+       
+        if not (password == user.password):
+            return jsonify({"status": "error", "data": "Bad username or password"}), 401
+
+        access_token = create_access_token(identity=username)
+        return jsonify({"status": "success", "data": {"jwt": access_token}}), 201
+    except Exception as e:
+        print(e)
+        return jsonify({"status": "error", "data": "An error has occurred"}), 401
+    
+@app.route('/registration' , methods = ['POST'])
+def register():
+    try:
+   
+        username = request.json.get("username", None)
+        password = request.json.get("password", None)
+        print(username)
+        print(password)
+        cursor = mydb.cursor()
+        req = "INSERT INTO users (username, password) VALUES (%s, %s)"
+        user = User(username, password = password)
+        val = (user.username, user.password)
+        cursor.execute(req, val)
+        print("PASSED THE DB EXECUTION ")
+        mydb.commit()
+        access_token = create_access_token(identity=username)
+        return jsonify({"status": "success", "data": {"jwt": access_token}}), 201
+    except Exception as e:
+        print(e)
+        return jsonify({"status": "error", "data": "An error has occurred"}), 401
 
 if __name__ == '__main__':
     app.run(host="0.0.0.0", port="5000", debug=True)

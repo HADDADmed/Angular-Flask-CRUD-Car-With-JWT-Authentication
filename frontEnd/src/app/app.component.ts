@@ -20,8 +20,8 @@ export class AppComponent {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CarDialogComponent, {
-          width:'27%',
-          height:'80%'
+          width:'29%',
+          height:'84%'
     });
 
     dialogRef.afterClosed().subscribe(result => {

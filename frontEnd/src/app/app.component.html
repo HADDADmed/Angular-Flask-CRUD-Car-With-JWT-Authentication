@@ -2,12 +2,14 @@
 
 <div id="navbar">
   <ul>
-     <li>  <a routerLink="/">Homme Page</a>  </li>
+     <li>  <a routerLink="/homme-page">Homme Page</a>  </li>
      <span class="hoverPointer"> <a  (click)="openDialog()" >ADD New Car</a></span>
      <li>  <a href="/lisofcars">All Cars </a> </li>
+     <li><a routerLink="login" routerLinkActive="active">Log in</a></li>
+     <li><a routerLink="registration" routerLinkActive="active">Register</a></li>
+
   </ul>
 </div>
-
 
 <router-outlet></router-outlet>
 

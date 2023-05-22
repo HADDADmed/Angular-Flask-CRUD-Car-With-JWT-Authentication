@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CarsComponent } from './cars/cars.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { RegistrationComponent } from './registration/registration.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -20,6 +19,16 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { CarEditDialogComponent } from './car-edit-dialog/car-edit-dialog.component';
+import { LoginComponent } from './login/login.component';
+import { LogoutComponent } from './logout/logout.component';
+
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AngularMaterialModule } from './angular-material.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FlexLayoutModule } from "@angular/flex-layout";
+
+
 
 
 
@@ -37,7 +46,9 @@ import { CarEditDialogComponent } from './car-edit-dialog/car-edit-dialog.compon
     CarsComponent,
     RegistrationComponent,
     CarDialogComponent,
-    CarEditDialogComponent
+    CarEditDialogComponent,
+    LoginComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,
@@ -54,12 +65,17 @@ import { CarEditDialogComponent } from './car-edit-dialog/car-edit-dialog.compon
     MatFormFieldModule,
     MatInputModule,
     MatPaginatorModule,
+    BrowserAnimationsModule,
+    AngularMaterialModule,
+    FlexLayoutModule,
+
 
 
 
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
 export class AppModule { }
